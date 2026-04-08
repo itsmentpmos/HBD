@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Happy Birthday Praejein 🎂</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Sarabun:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pink: #ff6eb4;
+  --purple: #b94fff;
+  --gold: #ffd95c;
+  --cream: #fff8f0;
+  --dark: #0d0010;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%; min-height: 100vh;
+  background: #000;
+  font-family: 'Sarabun', sans-serif;
+  overflow-x: hidden;
+  color: #fff;
+}
+
+/* ============ DARK ROOM ============ */
+#dark-room {
+  position: fixed; inset: 0; z-index: 9999;
+  background: #000;
+  display: flex; align-items: center; justify-content: center;
+  cursor: none;
+  transition: opacity 1.2s ease;
+}
+#dark-room.fade-out { opacity: 0; pointer-events: none; }
+
+#dark-text {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  text-align: center; pointer-events: none;
+  animation: breathe 3s ease-in-out infinite;
+}
+@keyframes breathe {
+  0%,100%{opacity:0.15} 50%{opacity:0.45}
+}
+#dark-text p {
+  font-family: 'Sarabun', sans-serif;
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
+  color: #ffffff55;
+  letter-spacing: 3px;
+}
+
+/* Hidden switch — top-left corner area */
+#light-switch {
+  position: absolute;
+  top: 0; left: 0;
+  width: clamp(60px, 15vw, 100px);
+  height: clamp(60px, 15vh, 100px);
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* Torch / flashlight follow cursor on desktop */
+#torch {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(circle 90px at var(--tx,50%) var(--ty,50%),
+    rgba(255,230,150,0.18) 0%, transparent 100%);
+  transition: background 0.05s;
+}
+
+/* Click ripple */
+.click-ripple {
+  position: absolute; border-radius: 50%;
+  width: 6px; height: 6px;
+  background: rgba(255,220,100,0.7);
+  transform: translate(-50%,-50%) scale(0);
+  animation: ripple-anim 0.6s ease-out forwards;
+  pointer-events: none;
+}
+@keyframes ripple-anim {
+  to { transform: translate(-50%,-50%) scale(20); opacity: 0; }
+}
+
+/* Hint pulse corner */
+.corner-hint {
+  position: absolute; top: 12px; left: 12px;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,220,100,0.6), transparent);
+  animation: corner-pulse 2s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes corner-pulse {
+  0%,100%{transform:scale(0.8);opacity:0.3}
+  50%{transform:scale(1.4);opacity:0.8}
+}
+
+/* ============ LIGHTS ON FLASH ============ */
+#flash-overlay {
+  position: fixed; inset: 0; z-index: 9000;
+  background: #fff;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.08s;
+}
+#flash-overlay.flash { opacity: 1; }
+
+/* ============ MAIN PAGE ============ */
+#main-page {
+  opacity: 0; transform: scale(0.98);
+  transition: opacity 1s ease 0.3s, transform 1s ease 0.3s;
+  min-height: 100vh;
+  background: #0d0010;
+  position: relative; overflow: hidden;
+}
+#main-page.revealed { opacity: 1; transform: scale(1); }
+
+/* Starfield canvas */
+#stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+
+/* Bokeh lights */
+.bokeh {
+  position: fixed; border-radius: 50%; filter: blur(60px);
+  pointer-events: none; z-index: 0; animation: drift 12s ease-in-out infinite;
+}
+.bokeh:nth-child(1){width:300px;height:300px;background:#b94fff22;top:-100px;left:-100px;animation-delay:0s;}
+.bokeh:nth-child(2){width:250px;height:250px;background:#ff6eb422;bottom:-80px;right:-80px;animation-delay:-4s;}
+.bokeh:nth-child(3){width:200px;height:200px;background:#ffd95c18;top:40%;left:60%;animation-delay:-8s;}
+@keyframes drift {
+  0%,100%{transform:translate(0,0)}
+  33%{transform:translate(20px,-20px)}
+  66%{transform:translate(-15px,10px)}
+}
+
+/* ============ HEADER ============ */
+.site-header {
+  position: relative; z-index: 10;
+  text-align: center; padding: clamp(40px,8vh,80px) 20px clamp(20px,4vh,40px);
+}
+
+.eyebrow {
+  font-size: clamp(0.65rem, 1.8vw, 0.8rem);
+  letter-spacing: 6px; color: #ffd95caa;
+  text-transform: uppercase; margin-bottom: 12px;
+  font-family: 'Sarabun', sans-serif; font-weight: 300;
+}
+
+.main-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(3rem, 12vw, 7rem);
+  line-height: 1;
+  background: linear-gradient(135deg, #ffd95c 0%, #ff9de2 40%, #c084fc 80%, #ffd95c 100%);
+  background-size: 300%;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer-title 6s linear infinite;
+  text-shadow: none;
+}
+@keyframes shimmer-title { 0%{background-position:0%} 100%{background-position:300%} }
+
+.name-line {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 8vw, 4.5rem);
+  font-style: italic; font-weight: 700;
+  color: #fff;
+  letter-spacing: 2px;
+  margin-top: 4px;
+  text-shadow: 0 0 40px #b94fff66;
+}
+
+/* ============ CAKE SECTION ============ */
+.cake-section {
+  position: relative; z-index: 10;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 0 20px 20px;
+}
+
+.cake-container {
+  position: relative;
+  width: clamp(260px, 70vw, 360px);
+  padding-top: clamp(50px, 8vw, 70px);
+}
+
+/* Candles row */
+.candles {
+  display: flex; justify-content: center;
+  gap: clamp(10px, 2.5vw, 18px);
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  width: 100%;
+}
+
+.candle {
+  display: flex; flex-direction: column; align-items: center;
+  cursor: pointer; transition: transform 0.2s;
+}
+.candle:active { transform: scale(0.92); }
+
+.flame-wrap {
+  width: clamp(18px,3vw,22px); height: clamp(26px,4vw,32px);
+  display: flex; align-items: flex-end; justify-content: center;
+  margin-bottom: 2px;
+}
+.flame {
+  width: clamp(12px,2vw,16px); height: clamp(20px,3.5vw,26px);
+  border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%;
+  background: radial-gradient(ellipse at 50% 80%, #fff9c4 10%, #ffca28 45%, #ff6f00 85%);
+  box-shadow: 0 0 10px 4px rgba(255,180,50,0.6), 0 0 20px 8px rgba(255,100,0,0.3);
+  animation: flicker 0.6s ease-in-out infinite alternate;
+  transform-origin: bottom center;
+  transition: all 0.5s cubic-bezier(0.68,-0.55,0.27,1.55);
+}
+.flame.out {
+  height: 2px; width: 8px; opacity: 0;
+  box-shadow: none; border-radius: 50%;
+}
+@keyframes flicker {
+  0%{transform:rotate(-5deg) scaleX(0.88) scaleY(1.02)}
+  100%{transform:rotate(5deg) scaleX(1.12) scaleY(0.97)}
+}
+
+.stick {
+  width: clamp(8px,1.5vw,11px); height: clamp(32px,5vw,44px);
+  border-radius: 3px 3px 2px 2px;
+}
+.c0 .stick{background:linear-gradient(180deg,#ff8a9a,#e91e63);}
+.c1 .stick{background:linear-gradient(180deg,#ce93d8,#7b1fa2);}
+.c2 .stick{background:linear-gradient(180deg,#80deea,#0097a7);}
+.c3 .stick{background:linear-gradient(180deg,#ffcc80,#e65100);}
+.c4 .stick{background:linear-gradient(180deg,#a5d6a7,#2e7d32);}
+
+/* Mic blow indicator */
+#mic-bar-wrap {
+  display: none;
+  width: clamp(200px,60vw,300px);
+  margin: 8px auto 4px;
+  align-items: center; gap: 8px;
+}
+#mic-bar-wrap.active { display: flex; }
+#mic-label { font-size: 0.75rem; color: #ffd95c; white-space: nowrap; }
+#mic-bar-track {
+  flex: 1; height: 6px; border-radius: 3px;
+  background: rgba(255,255,255,0.1); overflow: hidden;
+}
+#mic-bar-fill {
+  height: 100%; width: 0%; border-radius: 3px;
+  background: linear-gradient(90deg, #ff6eb4, #ffd95c);
+  transition: width 0.05s;
+}
+#mic-status { font-size: 0.7rem; color: #ffffff66; text-align: center; margin-bottom: 4px; }
+
+/* Cake SVG */
+.cake-svg-wrap svg { width: 100%; height: auto; display: block; filter: drop-shadow(0 16px 40px rgba(185,79,255,0.35)); }
+
+/* Wish messages */
+.wish-popup {
+  display: none; margin-top: 12px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 20px; padding: 14px 20px;
+  text-align: center; width: 100%; max-width: 400px;
+  animation: popIn 0.5s cubic-bezier(0.175,0.885,0.32,1.275);
+  backdrop-filter: blur(10px);
+  font-size: clamp(0.9rem,2.5vw,1rem);
+  color: #f0d9ff; line-height: 1.65;
+}
+.wish-popup.visible { display: block; }
+.wish-popup .wi { font-size: 1.8rem; margin-bottom: 6px; display: block; }
+.wish-final {
+  background: linear-gradient(135deg, rgba(185,79,255,0.2), rgba(255,110,180,0.2));
+  border-color: rgba(255,217,92,0.4);
+}
+@keyframes popIn {
+  0%{opacity:0;transform:scale(0.5) translateY(10px)}
+  100%{opacity:1;transform:scale(1) translateY(0)}
+}
+
+/* Blow hint */
+.blow-hint {
+  font-size: clamp(0.75rem,2vw,0.85rem); color: #ffd95caa;
+  margin-top: 6px; letter-spacing: 1px;
+  animation: hint-bounce 2s ease-in-out infinite;
+}
+@keyframes hint-bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+
+/* ============ EAT CAKE BUTTON ============ */
+.eat-section {
+  position: relative; z-index: 10;
+  text-align: center; padding: 8px 20px 24px;
+}
+.eat-btn {
+  background: linear-gradient(135deg, #ff6eb4, #b94fff);
+  border: none; border-radius: 50px;
+  padding: clamp(12px,2.5vw,16px) clamp(28px,6vw,48px);
+  font-size: clamp(1rem,3vw,1.15rem); font-weight: 600;
+  color: #fff; cursor: pointer; font-family: 'Sarabun', sans-serif;
+  box-shadow: 0 6px 28px rgba(185,79,255,0.5);
+  transition: transform 0.15s, box-shadow 0.2s;
+  letter-spacing: 0.5px;
+}
+.eat-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 36px rgba(185,79,255,0.7); }
+.eat-btn:active { transform: scale(0.96); }
+
+.eat-msg {
+  margin-top: 12px; min-height: 32px;
+  font-size: clamp(0.95rem,2.5vw,1.05rem); color: #f0d9ff;
+  transition: opacity 0.3s; opacity: 0;
+}
+.eat-msg.show { opacity: 1; animation: popIn 0.4s ease; }
+
+/* ============ MESSAGES ============ */
+.messages-section {
+  position: relative; z-index: 10;
+  max-width: 500px; margin: 0 auto; padding: 0 20px 24px;
+}
+.sec-label {
+  text-align: center; font-size: clamp(0.7rem,1.8vw,0.8rem);
+  letter-spacing: 4px; text-transform: uppercase;
+  color: #ffd95c88; margin-bottom: 16px;
+}
+.msg-card {
+  background: rgba(255,255,255,0.055);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 18px; padding: 18px 20px; margin-bottom: 12px;
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  backdrop-filter: blur(8px);
+}
+.msg-card.show { opacity: 1; transform: translateY(0); }
+.msg-icon { font-size: 1.5rem; margin-bottom: 6px; }
+.msg-text { font-size: clamp(0.88rem,2.3vw,0.98rem); line-height: 1.75; color: #e8d4ff; }
+
+/* ============ ACTION BUTTONS ============ */
+.actions {
+  position: relative; z-index: 10;
+  max-width: 500px; margin: 0 auto; padding: 0 20px 24px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+.act-btn {
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 16px; padding: 16px 12px;
+  background: rgba(255,255,255,0.06);
+  color: #fff; font-family: 'Sarabun', sans-serif;
+  font-size: clamp(0.85rem,2.2vw,0.95rem);
+  cursor: pointer; transition: all 0.2s;
+  backdrop-filter: blur(6px);
+}
+.act-btn:hover { background: rgba(255,255,255,0.12); transform: translateY(-2px); }
+.act-btn:active { transform: scale(0.97); }
+.act-btn span { display: block; font-size: 1.6rem; margin-bottom: 6px; }
+
+/* ============ FOOTER ============ */
+.site-footer {
+  position: relative; z-index: 10;
+  text-align: center; padding: 24px 20px 40px;
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(1.8rem,6vw,2.8rem);
+  background: linear-gradient(90deg, #ffd95c, #ff9de2, #c084fc);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============ CONFETTI CANVAS ============ */
+#confetti-c, #fireworks-c {
+  position: fixed; inset: 0; pointer-events: none; z-index: 500;
+}
+
+/* ============ MIC ACCESS OVERLAY ============ */
+#mic-overlay {
+  display: none; position: fixed; inset: 0; z-index: 800;
+  background: rgba(0,0,0,0.75); backdrop-filter: blur(6px);
+  align-items: center; justify-content: center;
+}
+#mic-overlay.show { display: flex; }
+.mic-box {
+  background: #1a0033; border: 1px solid rgba(185,79,255,0.4);
+  border-radius: 24px; padding: 32px 28px; max-width: 320px;
+  text-align: center;
+}
+.mic-box h3 { font-size: 1.3rem; margin-bottom: 12px; color: #ffd95c; }
+.mic-box p { font-size: 0.9rem; color: #ccaaff; line-height: 1.6; margin-bottom: 20px; }
+.mic-allow-btn {
+  background: linear-gradient(135deg, #b94fff, #ff6eb4);
+  border: none; border-radius: 50px; padding: 12px 32px;
+  color: #fff; font-size: 1rem; font-weight: 600; cursor: pointer;
+  font-family: 'Sarabun', sans-serif; margin-right: 8px;
+}
+.mic-skip-btn {
+  background: transparent; border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50px; padding: 12px 24px;
+  color: #ffffff88; font-size: 0.9rem; cursor: pointer;
+  font-family: 'Sarabun', sans-serif; margin-top: 10px;
+}
+
+/* ============ CAKE PROGRESS ============ */
+.cake-progress-wrap {
+  width: clamp(200px, 60vw, 300px);
+  margin: 6px auto 0;
+  display: none;
+}
+.cake-progress-wrap.show { display: block; }
+.cake-progress-track {
+  height: 10px; border-radius: 5px;
+  background: rgba(255,255,255,0.1); overflow: hidden; margin-bottom: 4px;
+}
+.cake-progress-fill {
+  height: 100%; border-radius: 5px;
+  background: linear-gradient(90deg, #ff6eb4, #ffd95c);
+  transition: width 0.5s ease;
+}
+.cake-progress-label {
+  font-size: 0.75rem; color: #ffd95caa; text-align: center;
+}
+
+/* ============ CAT POPUP ============ */
+#cat-popup {
+  display: none; position: fixed; inset: 0; z-index: 950;
+  background: rgba(0,0,0,0.82); backdrop-filter: blur(8px);
+  align-items: center; justify-content: center;
+}
+#cat-popup.show { display: flex; }
+.cat-box {
+  background: linear-gradient(135deg, #1a0033, #0d0010);
+  border: 2px solid rgba(185,79,255,0.5);
+  border-radius: 28px; padding: 30px 28px 24px;
+  max-width: 340px; width: 90%; text-align: center;
+  animation: popIn 0.5s cubic-bezier(0.175,0.885,0.32,1.275);
+  position: relative; overflow: hidden;
+}
+.cat-box::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(185,79,255,0.15), transparent 70%);
+  pointer-events: none;
+}
+.cat-img-wrap {
+  width: 180px; height: 180px; margin: 0 auto 14px;
+  border-radius: 50%; overflow: hidden;
+  border: 3px solid rgba(255,110,180,0.6);
+  box-shadow: 0 0 30px rgba(185,79,255,0.5);
+  background: #2a0044;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 5rem;
+}
+.cat-img-wrap img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.cat-box h3 { font-size: 1.4rem; color: #ffd95c; margin-bottom: 8px; }
+.cat-box p { font-size: 0.95rem; color: #e8d4ff; line-height: 1.6; margin-bottom: 20px; }
+.cat-eat-rest-btn {
+  background: linear-gradient(135deg, #ff6eb4, #b94fff);
+  border: none; border-radius: 50px;
+  padding: 13px 36px; font-size: 1rem; font-weight: 600;
+  color: #fff; cursor: pointer; font-family: 'Sarabun', sans-serif;
+  box-shadow: 0 6px 24px rgba(185,79,255,0.5);
+  transition: transform 0.15s, box-shadow 0.2s;
+}
+.cat-eat-rest-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(185,79,255,0.7); }
+.cat-eat-rest-btn:active { transform: scale(0.96); }
+
+/* ============ BIRTHDAY PERSON POPUP ============ */
+#bday-popup {
+  display: none; position: fixed; inset: 0; z-index: 960;
+  background: rgba(0,0,0,0.88); backdrop-filter: blur(10px);
+  align-items: center; justify-content: center;
+}
+#bday-popup.show { display: flex; }
+.bday-box {
+  background: linear-gradient(135deg, #1a0033, #0d0010);
+  border: 2px solid rgba(255,217,92,0.5);
+  border-radius: 28px; padding: 34px 28px 28px;
+  max-width: 360px; width: 90%; text-align: center;
+  animation: popIn 0.6s cubic-bezier(0.175,0.885,0.32,1.275);
+  position: relative;
+}
+.bday-photo-wrap {
+  width: 200px; height: 200px; margin: 0 auto 18px;
+  border-radius: 50%; overflow: hidden;
+  border: 4px solid #ffd95c;
+  box-shadow: 0 0 40px rgba(255,217,92,0.5), 0 0 80px rgba(185,79,255,0.3);
+  background: #2a0044;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 5rem;
+}
+.bday-photo-wrap img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.bday-box h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.2rem;
+  background: linear-gradient(135deg, #ffd95c, #ff9de2, #c084fc);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; margin-bottom: 10px;
+}
+.bday-box p { font-size: 1rem; color: #e8d4ff; line-height: 1.7; margin-bottom: 22px; }
+.bday-close-btn {
+  background: linear-gradient(135deg, #ffd95c, #ff6eb4);
+  border: none; border-radius: 50px;
+  padding: 13px 36px; font-size: 1rem; font-weight: 600;
+  color: #fff; cursor: pointer; font-family: 'Sarabun', sans-serif;
+  box-shadow: 0 6px 24px rgba(255,110,180,0.5);
+}
+.bday-stars-anim {
+  position: absolute; inset: 0; pointer-events: none;
+  overflow: hidden; border-radius: 28px;
+}
+</style>
+</head>
+<body>
+
+<!-- Canvases -->
+<canvas id="confetti-c"></canvas>
+<canvas id="fireworks-c"></canvas>
+
+<!-- Flash overlay -->
+<div id="flash-overlay"></div>
+
+<!-- DARK ROOM -->
+<div id="dark-room">
+  <canvas id="torch-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;"></canvas>
+  <div id="dark-text">
+    <p>กดที่มุมซ้ายบน...</p>
+    <p style="margin-top:6px;font-size:0.7em;">🕯️ ลองหาสวิตช์ไฟดูสิ</p>
+  </div>
+  <div class="corner-hint"></div>
+  <div id="light-switch" onclick="turnOnLights(event)"></div>
+</div>
+
+<!-- MIC OVERLAY -->
+<div id="mic-overlay">
+  <div class="mic-box">
+    <h3>🎤 เป่าเทียนด้วยเสียง!</h3>
+    <p>อนุญาตให้ใช้ไมโครโฟนเพื่อจับเสียงการเป่า เมื่อเป่าเข้าไมค์ เทียนจะดับเอง!</p>
+    <button class="mic-allow-btn" onclick="startMic()">อนุญาต 🎤</button>
+    <br>
+    <button class="mic-skip-btn" onclick="skipMic()">ข้าม (กดเทียนแทน)</button>
+  </div>
+</div>
+
+<!-- MAIN PAGE -->
+<div id="main-page">
+  <div class="bokeh"></div>
+  <div class="bokeh"></div>
+  <div class="bokeh"></div>
+  <canvas id="stars"></canvas>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="eyebrow">✦ วันพิเศษของ ✦</div>
+    <h1 class="main-title">Happy Birthday</h1>
+    <div class="name-line">Praejein</div>
+  </header>
+
+  <!-- Cake -->
+  <div class="cake-section">
+    <div id="mic-status">กำลังโหลด...</div>
+
+    <div id="mic-bar-wrap">
+      <span id="mic-label">🎤 เป่าเลย!</span>
+      <div id="mic-bar-track"><div id="mic-bar-fill"></div></div>
+    </div>
+
+    <div class="cake-container">
+      <!-- Candles -->
+      <div class="candles" id="candle-row">
+        <div class="candle c0" onclick="blowCandle(0)">
+          <div class="flame-wrap"><div class="flame" id="f0"></div></div>
+          <div class="stick"></div>
+        </div>
+        <div class="candle c1" onclick="blowCandle(1)">
+          <div class="flame-wrap"><div class="flame" id="f1"></div></div>
+          <div class="stick"></div>
+        </div>
+        <div class="candle c2" onclick="blowCandle(2)">
+          <div class="flame-wrap"><div class="flame" id="f2"></div></div>
+          <div class="stick"></div>
+        </div>
+        <div class="candle c3" onclick="blowCandle(3)">
+          <div class="flame-wrap"><div class="flame" id="f3"></div></div>
+          <div class="stick"></div>
+        </div>
+        <div class="candle c4" onclick="blowCandle(4)">
+          <div class="flame-wrap"><div class="flame" id="f4"></div></div>
+          <div class="stick"></div>
+        </div>
+      </div>
+
+      <!-- Cake SVG -->
+      <div class="cake-svg-wrap">
+        <svg viewBox="0 0 360 230" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#fff9c4" stop-opacity="0.4"/>
+              <stop offset="100%" stop-color="#ff6f00" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="cake1" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#f48fb1"/>
+              <stop offset="100%" stop-color="#e91e63"/>
+            </linearGradient>
+            <linearGradient id="cake2" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#ce93d8"/>
+              <stop offset="100%" stop-color="#7b1fa2"/>
+            </linearGradient>
+            <linearGradient id="plate" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#ffd95c"/>
+              <stop offset="100%" stop-color="#f9a825"/>
+            </linearGradient>
+          </defs>
+          <!-- Plate -->
+          <ellipse cx="180" cy="222" rx="158" ry="12" fill="url(#plate)" opacity="0.4"/>
+          <!-- Bottom tier body -->
+          <rect x="18" y="135" width="324" height="84" rx="12" fill="url(#cake1)"/>
+          <!-- Bottom tier top face -->
+          <ellipse cx="180" cy="135" rx="162" ry="12" fill="#f06292"/>
+          <!-- Frosting drip bottom -->
+          <path d="M30 147 Q48 165 66 147 Q84 165 102 147 Q120 165 138 147 Q156 165 174 147 Q192 165 210 147 Q228 165 246 147 Q264 165 282 147 Q300 165 330 147" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity="0.55"/>
+          <!-- Decorations bottom -->
+          <circle cx="75" cy="173" r="9" fill="#ffd95c"/>
+          <circle cx="145" cy="180" r="9" fill="#80deea"/>
+          <circle cx="215" cy="180" r="9" fill="#a5d6a7"/>
+          <circle cx="285" cy="173" r="9" fill="#ffab91"/>
+          <text x="75" y="178" font-size="9" text-anchor="middle" fill="#7b1fa2">★</text>
+          <text x="285" y="178" font-size="9" text-anchor="middle" fill="#7b1fa2">★</text>
+          <!-- Top tier body -->
+          <rect x="68" y="66" width="224" height="72" rx="12" fill="url(#cake2)"/>
+          <!-- Top tier top face -->
+          <ellipse cx="180" cy="66" rx="112" ry="10" fill="#ba68c8"/>
+          <!-- Frosting drip top -->
+          <path d="M78 76 Q94 91 110 76 Q126 91 142 76 Q158 91 174 76 Q190 91 206 76 Q222 91 238 76 Q254 91 270 76 Q278 91 282 76" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity="0.55"/>
+          <!-- Decorations top -->
+          <circle cx="130" cy="102" r="7" fill="#ffd95c" opacity="0.85"/>
+          <circle cx="180" cy="106" r="7" fill="#ff8a80" opacity="0.85"/>
+          <circle cx="230" cy="102" r="7" fill="#80cbc4" opacity="0.85"/>
+          <!-- Candle bases -->
+          <rect x="111" y="54" width="13" height="16" rx="3" fill="#fff3" />
+          <rect x="174" y="50" width="13" height="20" rx="3" fill="#fff3" />
+          <rect x="237" y="54" width="13" height="16" rx="3" fill="#fff3" />
+        </svg>
+      </div>
+    </div>
+
+    <div class="blow-hint" id="blow-hint">🎤 เป่าเข้าไมค์ หรือกดที่เทียน เพื่ออธิษฐาน!</div>
+
+    <!-- Wish popups -->
+    <div class="wish-popup" id="w0"><span class="wi">🌸</span>เทียนเล่มแรก... อยากให้เธอรู้ว่าเธอทำให้ทุกวันของฉันมีความหมายขึ้นมากเลยนะ</div>
+    <div class="wish-popup" id="w1"><span class="wi">💜</span>ขอให้สิ่งที่เธอตั้งใจทุกอย่างเป็นจริง ฉันจะอยู่ตรงนี้เสมอ คอยเชียร์อยู่ข้างๆ เธอ</div>
+    <div class="wish-popup" id="w2"><span class="wi">✨</span>ปีนี้ขอให้เธอได้แต่สิ่งดีๆ นะ เพราะเธอสมควรได้รับสิ่งที่ดีที่สุดมากกว่าใครเลย</div>
+    <div class="wish-popup" id="w3"><span class="wi">🌟</span>ขอบคุณที่เลือกอยู่ด้วยกัน รักเธอทุกวันเลยนะ ไม่ใช่แค่วันเกิด</div>
+    <div class="wish-popup" id="w4"><span class="wi">🎊</span>เทียนสุดท้าย... ขอให้เธอมีความสุขมากๆ แล้วก็... รักเธอมากนะ 🥹</div>
+    <div class="wish-popup wish-final" id="w-all">
+      <span class="wi">🎆</span>
+      <strong style="font-size:1.1em;color:#ffd95c;">ดับครบทุกเล่มแล้ว! 🎉</strong><br>
+      คำอธิษฐานส่งถึงเธอแล้วนะ ✨<br>
+      <span style="color:#ffb3e0;">Happy Birthday Praejein — รักเธอมากที่สุดเลย 💜</span>
+    </div>
+  </div>
+
+  <!-- Eat cake -->
+  <div class="eat-section">
+    <button class="eat-btn" id="eat-btn" onclick="eatCake()">🍰 กินเค้กเลย!</button>
+    <div class="eat-msg" id="eat-msg"></div>
+    <div class="cake-progress-wrap" id="cake-progress-wrap">
+      <div class="cake-progress-track">
+        <div class="cake-progress-fill" id="cake-progress-fill" style="width:0%"></div>
+      </div>
+      <div class="cake-progress-label" id="cake-progress-label">เค้กยังเต็มอยู่!</div>
+    </div>
+  </div>
+
+  <!-- Cat popup -->
+  <div id="cat-popup">
+    <div class="cat-box">
+      <div class="cat-img-wrap">
+        <img src="pic/663386888_1272626844394225_6772953748435969425_n.jpg" alt="cat" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <h3>😱 แมวมาแย่ง!</h3>
+      <p>เฮ้ย!! แมวมาแย่งกินก่อนเลย! 🐾<br>รีบกินส่วนที่เหลือก่อนที่มันจะเอาไปหมดนะ!</p>
+      <button class="cat-eat-rest-btn" onclick="eatRest()">🍰 กินส่วนที่เหลือ!</button>
+    </div>
+  </div>
+
+  <!-- Birthday person popup -->
+  <div id="bday-popup">
+    <div class="bday-box">
+      <div class="bday-stars-anim" id="bday-stars-anim"></div>
+      <div class="bday-photo-wrap">
+        <img src="pic/668795378_919060990959122_8108016769253198327_n.jpg" alt="Praejein" style="width:100%;height:100%;object-fit:cover;object-position:top;">
+      </div>
+      <h2>Happy Birthday!</h2>
+      <p>กินหมดแล้ว! ชนะแมวได้ 🎉<br>Happy Birthday นะ Praejein 🥺<br>รักเธอมากที่สุดเลย 💜</p>
+      <button class="bday-close-btn" onclick="closeBdayPopup()">🎊 ขอบคุณ!</button>
+    </div>
+  </div>
+
+  <!-- Messages -->
+  <div class="messages-section">
+    <div class="sec-label">✦ ข้อความอวยพรพิเศษ ✦</div>
+    <div class="msg-card" id="mc1">
+      <div class="msg-icon">🎀</div>
+      <div class="msg-text">Happy Birthday นะ 🥺 อยากให้รู้ว่าวันนี้คิดถึงเธอตลอดเลย หวังว่าวันนี้จะเป็นวันที่ดีที่สุดในรอบปีของเธอเลย</div>
+    </div>
+    <div class="msg-card" id="mc2">
+      <div class="msg-icon">🌙</div>
+      <div class="msg-text">ปีที่ผ่านมาได้อยู่ใกล้เธอ ได้เห็นเธอทำทุกอย่าง... เธอเก่งมากนะ รู้ไหม? ปีนี้ขอให้ทุกอย่างที่เธอตั้งใจออกมาดีนะ 💫</div>
+    </div>
+    <div class="msg-card" id="mc3">
+      <div class="msg-icon">💜</div>
+      <div class="msg-text">ไม่รู้จะบอกยังไงดี แต่แค่อยากให้รู้ว่ารักเธอมากนะ วันเกิดปีนี้ขอให้เธอมีความสุขตลอดไปเลย 🎂</div>
+    </div>
+  </div>
+
+  <!-- Action buttons -->
+  <div class="actions">
+    <button class="act-btn" onclick="launchConfetti()"><span>🎊</span>โรยกระดาษ!</button>
+    <button class="act-btn" onclick="launchFireworks()"><span>🎆</span>ยิงพลุ!</button>
+    <button class="act-btn" onclick="startMicAgain()"><span>🎤</span>ใช้ไมค์เป่า</button>
+    <button class="act-btn" onclick="resetCandles()"><span>🕯️</span>จุดเทียนใหม่</button>
+  </div>
+
+  <footer class="site-footer">Happy Birthday Praejein 🎂</footer>
+</div>
+
+<script>
+/* ============================================================
+   DARK ROOM — TORCH & REVEAL
+   ============================================================ */
+const darkRoom = document.getElementById('dark-room');
+const torchCanvas = document.getElementById('torch-canvas');
+const tCtx = torchCanvas.getContext('2d');
+let torchOn = false;
+
+function resizeTorch(){
+  torchCanvas.width = darkRoom.offsetWidth;
+  torchCanvas.height = darkRoom.offsetHeight;
+}
+resizeTorch();
+window.addEventListener('resize', resizeTorch);
+
+// Draw torch light following touch/mouse
+function drawTorch(x, y){
+  tCtx.clearRect(0, 0, torchCanvas.width, torchCanvas.height);
+  const grad = tCtx.createRadialGradient(x, y, 0, x, y, 110);
+  grad.addColorStop(0, 'rgba(255,230,150,0.22)');
+  grad.addColorStop(1, 'rgba(0,0,0,0)');
+  tCtx.fillStyle = grad;
+  tCtx.fillRect(0, 0, torchCanvas.width, torchCanvas.height);
+}
+
+darkRoom.addEventListener('mousemove', e => {
+  const r = darkRoom.getBoundingClientRect();
+  drawTorch(e.clientX - r.left, e.clientY - r.top);
+});
+darkRoom.addEventListener('touchmove', e => {
+  e.preventDefault();
+  const r = darkRoom.getBoundingClientRect();
+  const t = e.touches[0];
+  drawTorch(t.clientX - r.left, t.clientY - r.top);
+}, { passive: false });
+
+// Click ripple
+darkRoom.addEventListener('click', e => {
+  if (torchOn) return;
+  const rip = document.createElement('div');
+  rip.className = 'click-ripple';
+  rip.style.left = e.clientX + 'px';
+  rip.style.top = e.clientY + 'px';
+  document.body.appendChild(rip);
+  setTimeout(() => rip.remove(), 700);
+});
+
+function turnOnLights(e){
+  if (torchOn) return;
+  torchOn = true;
+  e.stopPropagation();
+
+  // Flash white
+  const fl = document.getElementById('flash-overlay');
+  fl.classList.add('flash');
+  setTimeout(() => fl.classList.remove('flash'), 120);
+
+  // Fade dark room
+  darkRoom.classList.add('fade-out');
+  setTimeout(() => { darkRoom.style.display = 'none'; }, 1300);
+
+  // Show main page
+  const mp = document.getElementById('main-page');
+  mp.classList.add('revealed');
+
+  // Init everything
+  setTimeout(() => {
+    initStars();
+    revealMessages();
+    launchConfetti();
+    showMicOverlay();
+    document.getElementById('mic-status').textContent = '';
+  }, 400);
+}
+
+/* ============================================================
+   STARS
+   ============================================================ */
+function initStars(){
+  const c = document.getElementById('stars');
+  const ctx = c.getContext('2d');
+  function resize(){ c.width = innerWidth; c.height = innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  const stars = Array.from({length:140}, () => ({
+    x: Math.random(), y: Math.random(),
+    r: Math.random()*1.6+0.2,
+    a: Math.random(), da: (Math.random()-0.5)*0.025
+  }));
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    stars.forEach(s => {
+      s.a += s.da;
+      if(s.a<0||s.a>1) s.da *= -1;
+      ctx.beginPath();
+      ctx.arc(s.x*c.width, s.y*c.height, s.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(255,240,255,${Math.max(0,Math.min(1,s.a))})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+/* ============================================================
+   MESSAGES REVEAL
+   ============================================================ */
+function revealMessages(){
+  ['mc1','mc2','mc3'].forEach((id, i) => {
+    setTimeout(() => document.getElementById(id).classList.add('show'), 800 + i*350);
+  });
+}
+
+/* ============================================================
+   MIC
+   ============================================================ */
+let audioCtx = null, analyser = null, micStream = null;
+let micActive = false;
+let blowThreshold = 35; // volume level to count as blow
+let blowFrames = 0;
+const BLOW_FRAMES_NEEDED = 8;
+
+function showMicOverlay(){
+  document.getElementById('mic-overlay').classList.add('show');
+}
+
+function startMic(){
+  document.getElementById('mic-overlay').classList.remove('show');
+  navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+    .then(stream => {
+      micStream = stream;
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 512;
+      const src = audioCtx.createMediaStreamSource(stream);
+      src.connect(analyser);
+      micActive = true;
+      document.getElementById('mic-bar-wrap').classList.add('active');
+      document.getElementById('mic-status').textContent = '🎤 พร้อมรับเสียงแล้ว — เป่าเข้าไมค์เลย!';
+      document.getElementById('blow-hint').textContent = '🎤 เป่าเข้าไมค์เพื่อดับเทียน!';
+      listenMic();
+    })
+    .catch(() => {
+      document.getElementById('mic-status').textContent = '⚠️ ไม่สามารถเข้าถึงไมค์ได้ — กดที่เทียนแทนได้เลย';
+      document.getElementById('mic-overlay').classList.remove('show');
+    });
+}
+
+function skipMic(){
+  document.getElementById('mic-overlay').classList.remove('show');
+  document.getElementById('mic-status').textContent = '💡 กดที่เทียนโดยตรงเพื่ออธิษฐาน';
+  document.getElementById('blow-hint').textContent = '👆 กดที่เทียนเพื่ออธิษฐาน!';
+}
+
+function startMicAgain(){
+  if (micActive) return;
+  showMicOverlay();
+}
+
+let blownSet = new Set();
+function listenMic(){
+  if (!micActive) return;
+  const buf = new Uint8Array(analyser.fftSize);
+  function loop(){
+    if (!micActive) return;
+    analyser.getByteTimeDomainData(buf);
+    let sum = 0;
+    for (let i=0;i<buf.length;i++) sum += Math.abs(buf[i]-128);
+    const vol = sum / buf.length;
+    const pct = Math.min(100, vol * 4);
+    document.getElementById('mic-bar-fill').style.width = pct + '%';
+
+    if (vol > blowThreshold) {
+      blowFrames++;
+      if (blowFrames >= BLOW_FRAMES_NEEDED) {
+        blowFrames = 0;
+        blowNextCandle();
+      }
+    } else {
+      blowFrames = Math.max(0, blowFrames - 1);
+    }
+    requestAnimationFrame(loop);
+  }
+  loop();
+}
+
+let blownOrder = [0,1,2,3,4];
+let blownIdx = 0;
+
+function blowNextCandle(){
+  if (blownIdx >= blownOrder.length) return;
+  blowCandle(blownOrder[blownIdx]);
+  blownIdx++;
+}
+
+/* ============================================================
+   CANDLES
+   ============================================================ */
+const wishes = ['w0','w1','w2','w3','w4'];
+let blownCount = 0;
+let blownFlags = [false,false,false,false,false];
+
+function blowCandle(i){
+  if (blownFlags[i]) return;
+  blownFlags[i] = true;
+  blownCount++;
+  document.getElementById('f'+i).classList.add('out');
+  setTimeout(() => {
+    document.getElementById(wishes[i]).classList.add('visible');
+  }, 300);
+  if (blownCount === 5) {
+    setTimeout(() => {
+      document.getElementById('w-all').classList.add('visible');
+      document.getElementById('blow-hint').textContent = '🎉 ดับทุกเทียนแล้ว!';
+      launchConfetti();
+      launchFireworks();
+    }, 700);
+  }
+}
+
+function resetCandles(){
+  blownCount = 0; blownIdx = 0;
+  blownFlags = [false,false,false,false,false];
+  for(let i=0;i<5;i++){
+    document.getElementById('f'+i).classList.remove('out');
+    document.getElementById(wishes[i]).classList.remove('visible');
+  }
+  document.getElementById('w-all').classList.remove('visible');
+  document.getElementById('blow-hint').textContent = micActive ? '🎤 เป่าเข้าไมค์เพื่อดับเทียน!' : '👆 กดที่เทียนเพื่ออธิษฐาน!';
+}
+
+/* ============================================================
+   EAT CAKE
+   ============================================================ */
+const TOTAL_BITES = 5;
+const eatLines = [
+  '😋 อร่อยมากๆ เลย! ชั้นแรกครีมสตรอว์เบอร์รี่!',
+  '🍰 ชั้นที่สองรสบลูเบอร์รี่ นุ่มละมุนมาก!',
+  '😍 ครีมชีสหน้าเค้ก... สวรรค์เลยจริงๆ!',
+];
+const progressLabels = [
+  'เพิ่งเริ่มกิน...',
+  'กินไปแล้ว 40%!',
+  'กินไปครึ่งนึงแล้ว!',
+  'เกือบหมดแล้ว! 😮',
+  'หมดแล้ว!! 🎉',
+];
+let eatIdx = 0;
+
+function eatCake(){
+  if (eatIdx >= TOTAL_BITES) return;
+
+  // Show progress bar
+  document.getElementById('cake-progress-wrap').classList.add('show');
+
+  const msg = document.getElementById('eat-msg');
+  msg.classList.remove('show');
+  void msg.offsetWidth;
+
+  eatIdx++;
+  const pct = (eatIdx / TOTAL_BITES) * 100;
+  document.getElementById('cake-progress-fill').style.width = pct + '%';
+  document.getElementById('cake-progress-label').textContent = progressLabels[eatIdx - 1];
+
+  if (eatIdx === 1) {
+    msg.textContent = eatLines[0];
+    msg.classList.add('show');
+    launchConfetti();
+  } else if (eatIdx === 2) {
+    msg.textContent = eatLines[1];
+    msg.classList.add('show');
+  } else if (eatIdx === 3) {
+    msg.textContent = eatLines[2];
+    msg.classList.add('show');
+  } else if (eatIdx === 4) {
+    // Cat popup!
+    msg.textContent = '';
+    document.getElementById('eat-btn').disabled = true;
+    document.getElementById('eat-btn').style.opacity = '0.5';
+    setTimeout(() => {
+      document.getElementById('cat-popup').classList.add('show');
+    }, 500);
+  }
+}
+
+function eatRest(){
+  document.getElementById('cat-popup').classList.remove('show');
+  eatIdx = TOTAL_BITES;
+  document.getElementById('cake-progress-fill').style.width = '100%';
+  document.getElementById('cake-progress-label').textContent = progressLabels[4];
+  document.getElementById('eat-btn').style.display = 'none';
+
+  const msg = document.getElementById('eat-msg');
+  msg.textContent = '🎉 กินหมดแล้ว! ชนะแมวได้!';
+  msg.classList.add('show');
+
+  launchConfetti();
+  launchFireworks();
+
+  setTimeout(() => {
+    document.getElementById('bday-popup').classList.add('show');
+    spawnBdayStars();
+  }, 1000);
+}
+
+function closeBdayPopup(){
+  document.getElementById('bday-popup').classList.remove('show');
+}
+
+function spawnBdayStars(){
+  const wrap = document.getElementById('bday-stars-anim');
+  wrap.innerHTML = '';
+  const emojis = ['✨','⭐','💜','🎊','🌸','💫','🎉'];
+  for(let i=0; i<12; i++){
+    const s = document.createElement('span');
+    s.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    s.style.cssText = `position:absolute;font-size:${Math.random()*14+10}px;
+      left:${Math.random()*100}%;top:${Math.random()*100}%;
+      animation:bdayStarDrift ${Math.random()*2+1.5}s ease-in-out infinite alternate;
+      opacity:0.7;pointer-events:none;`;
+    wrap.appendChild(s);
+  }
+}
+
+// Add keyframe for star drift
+const bdayStyle = document.createElement('style');
+bdayStyle.textContent = `@keyframes bdayStarDrift {
+  0%{transform:translateY(0) rotate(0deg);opacity:0.5}
+  100%{transform:translateY(-12px) rotate(20deg);opacity:1}
+}`;
+document.head.appendChild(bdayStyle);
+
+/* ============================================================
+   CONFETTI
+   ============================================================ */
+const cc = document.getElementById('confetti-c');
+const cCtx = cc.getContext('2d');
+let pieces = [];
+function resCC(){ cc.width=innerWidth; cc.height=innerHeight; }
+resCC(); window.addEventListener('resize', resCC);
+
+const cols = ['#ff6eb4','#ffd95c','#b94fff','#80deea','#ff4060','#a5d6a7','#ff9a3c','#fff'];
+
+function launchConfetti(){
+  for(let i=0;i<130;i++) pieces.push({
+    x: Math.random()*cc.width, y: -10,
+    vx: (Math.random()-0.5)*7, vy: Math.random()*4+2,
+    r: Math.random()*9+4, col: cols[Math.floor(Math.random()*cols.length)],
+    rot: Math.random()*360, rotV: (Math.random()-0.5)*9,
+    shape: Math.random()<0.5?'r':'c', life:1
+  });
+  animConf();
+}
+let cRaf=null;
+function animConf(){
+  cRaf && cancelAnimationFrame(cRaf);
+  cCtx.clearRect(0,0,cc.width,cc.height);
+  pieces = pieces.filter(p=>p.life>0);
+  pieces.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy; p.vy+=0.12; p.rot+=p.rotV; p.life-=0.008;
+    cCtx.save(); cCtx.globalAlpha=Math.max(0,p.life);
+    cCtx.translate(p.x,p.y); cCtx.rotate(p.rot*Math.PI/180);
+    cCtx.fillStyle=p.col;
+    if(p.shape==='c'){ cCtx.beginPath(); cCtx.arc(0,0,p.r/2,0,Math.PI*2); cCtx.fill(); }
+    else cCtx.fillRect(-p.r/2,-p.r/3,p.r,p.r/1.5);
+    cCtx.restore();
+  });
+  if(pieces.length) cRaf = requestAnimationFrame(animConf);
+}
+
+/* ============================================================
+   FIREWORKS
+   ============================================================ */
+const fc = document.getElementById('fireworks-c');
+const fCtx = fc.getContext('2d');
+let fParts = [];
+function resFC(){ fc.width=innerWidth; fc.height=innerHeight; }
+resFC(); window.addEventListener('resize', resFC);
+
+function launchFireworks(){
+  for(let i=0;i<6;i++) setTimeout(()=>explode(
+    Math.random()*fc.width*0.7+fc.width*0.15,
+    Math.random()*fc.height*0.5+60
+  ), i*280);
+}
+function explode(cx,cy){
+  const col = cols[Math.floor(Math.random()*cols.length)];
+  for(let i=0;i<70;i++){
+    const a = (i/70)*Math.PI*2, spd = Math.random()*6+2;
+    fParts.push({x:cx,y:cy,vx:Math.cos(a)*spd,vy:Math.sin(a)*spd,life:1,col,r:Math.random()*3+1});
+  }
+  animFW();
+}
+let fRaf=null;
+function animFW(){
+  fRaf && cancelAnimationFrame(fRaf);
+  fCtx.clearRect(0,0,fc.width,fc.height);
+  fParts = fParts.filter(p=>p.life>0);
+  fParts.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy; p.vy+=0.09; p.life-=0.02;
+    fCtx.save(); fCtx.globalAlpha=Math.max(0,p.life);
+    fCtx.fillStyle=p.col; fCtx.shadowColor=p.col; fCtx.shadowBlur=8;
+    fCtx.beginPath(); fCtx.arc(p.x,p.y,p.r,0,Math.PI*2); fCtx.fill();
+    fCtx.restore();
+  });
+  if(fParts.length) fRaf = requestAnimationFrame(animFW);
+}
+</script>
+</body>
+</html>
